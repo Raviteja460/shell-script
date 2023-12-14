@@ -7,7 +7,7 @@ Y="\e[33m"
 N="\e[0m"
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-$TIMESTAMP.Log"
+LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
 echo "script started at $TIMESTAMP" &>> $LOGFILE
 
@@ -22,21 +22,22 @@ VALIDATE(){
 
 if [ $ID -ne 0 ]
 then
-    echo -e " $R ERROR:: Please run this script with root access $N"
+    echo -e "$R ERROR:: Please run this script with root access $N"
     exit 1
 else
-    echo " You are root user "
+    echo "You are root user"
 fi
+
+#echo "All arguments passed: $@"
 
 for package in $@
 do 
-    yum list installed $package
+    yum list installed $package &>> $LOGFILE
     if[ $? -ne 0 ]
     then 
-        yum install $package -y
-        VALIDATE $1 "Installation of $package"
+        yum install $package -y &>> $LOGFILE
+        VALIDATE $? "Installation of $package"
     else
-        echo -e " $Y ... $package is already installed $N " 
-    
+        echo -e " $Y ... $package is already installed $N "     
 done
 
