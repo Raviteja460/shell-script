@@ -38,6 +38,6 @@ do
         yum install $package -y &>> $LOGFILE
         VALIDATE $? "Installation of $package"
     else
-        echo -e " $Y ... $package is already installed $N "     
+        echo -e " $Y ... $package is already installed $N " 
 done
 
