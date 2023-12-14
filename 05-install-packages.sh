@@ -28,7 +28,7 @@ else
     echo "You are root user"
 fi
 
-#echo "All arguments passed: $@"
+echo "All arguments passed: $@"
 
 for package in $@
 do 
