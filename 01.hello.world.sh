@@ -1,1 +1,1 @@
-I am practing git 
+echo " I am practing git "
